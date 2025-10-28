@@ -1,0 +1,40 @@
+---
+import AppIcon from '@/components/astro/AppIcon.astro'
+import Header from '@/components/astro/base/Header/Header.astro'
+import HeaderEnd from '@/components/astro/base/Header/HeaderEnd.astro'
+import HeaderStart from '@/components/astro/base/Header/HeaderStart.astro'
+import HeaderTitle from '@/components/astro/base/Header/HeaderTitle.astro'
+import PageHeadingGroup from '@/components/astro/base/PageHeading/PageHeadingGroup.astro'
+import PageHeadingSubtitle from '@/components/astro/base/PageHeading/PageHeadingSubtitle.astro'
+import PageHeadingTitle from '@/components/astro/base/PageHeading/PageHeadingTitle.astro'
+import DefaultLayout from '@/layouts/DefaultLayout.astro'
+import McatAi from '@/pages/mcat-ai/_McatAi.vue'
+
+
+const pageTitle = 'MCAT AI'
+
+---
+
+<DefaultLayout
+  metaTitle={pageTitle}
+  metaDescription="Always here to help"
+  className="bg-amber-50/40"
+
+>
+  <Header>
+    <HeaderStart>
+      <AppIcon icon="book-open-text" size="sm" color="bg-orange-500" />
+      <HeaderTitle>{pageTitle}</HeaderTitle>
+    </HeaderStart>
+    <HeaderEnd></HeaderEnd>
+  </Header>
+  <main class="container max-w-7xl h-[800px] mx-auto px-6 py-8">
+    <PageHeadingGroup>
+      <PageHeadingTitle>MCAT AI</PageHeadingTitle>
+      <PageHeadingSubtitle>Your one source for question explanations, study guides, and everything MCAT</PageHeadingSubtitle>
+    </PageHeadingGroup>
+
+    <McatAi client:load />
+
+  </main>
+</DefaultLayout>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz@0,9..40;1,9..40&family=Lexend&display=swap"
+        rel="stylesheet">
+  <style>
+    .max-width {
+      max-width: 1100px;
+    }
+    .space {
+      margin: 8rem 0;
+    }
+  </style>
+</head>
+<body>
+<bootcamp-pricing-form class="max-width space"></bootcamp-pricing-form>
+<comprehensive-course-pricing-form class="max-width space"></comprehensive-course-pricing-form>
+<plain-hours-pricing-form class="max-width space"></plain-hours-pricing-form>
+<build-your-own-pricing-form class="max-width space"></build-your-own-pricing-form>
+<admissions-pricing-form class="max-width space"></admissions-pricing-form>
+<!--<div id="app" class="max-width"></div>-->
+
+<script type="module" src="./dist/onesm.es.js"></script>
+<script type="module">
+  import { register, BootcampPricingForm, BuildYourOwnPricingForm, PlainHoursPricingForm, ComprehensiveCoursePricingForm, AdmissionsPricingForm } from './dist/onesm.es.js'
+
+  register()
+  // document.querySelector('#app').appendChild(new BootcampPricingForm())
+  // document.querySelector('#app').appendChild(new ComprehensiveCoursePricingForm())
+  // document.querySelector('#app').appendChild(new BuildYourOwnPricingForm())
+  // document.querySelector('#app').appendChild(new PlainHoursPricingForm())
+  // document.querySelector('#app').appendChild(new AdmissionsPricingForm())
+</script>
+</body>
+</html>

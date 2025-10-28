@@ -1,0 +1,37 @@
+---
+import AppIcon from '@/components/astro/AppIcon.astro'
+import Header from '@/components/astro/base/Header/Header.astro'
+import HeaderEnd from '@/components/astro/base/Header/HeaderEnd.astro'
+import HeaderStart from '@/components/astro/base/Header/HeaderStart.astro'
+import HeaderTitle from '@/components/astro/base/Header/HeaderTitle.astro'
+import PageHeadingGroup from '@/components/astro/base/PageHeading/PageHeadingGroup.astro'
+import PageHeadingSubtitle from '@/components/astro/base/PageHeading/PageHeadingSubtitle.astro'
+import PageHeadingTitle from '@/components/astro/base/PageHeading/PageHeadingTitle.astro'
+import DefaultLayout from '@/layouts/DefaultLayout.astro'
+import PricingForm from '@/pages/pricing/_PricingForm.vue'
+
+const pageTitle = 'Pricing Model'
+
+---
+<DefaultLayout
+  metaTitle={pageTitle}
+  metaDescription="Select your plan options and instantly see your customized pricing."
+  className="bg-linear-to-b from-neutral-50 to-primary/5"
+>
+  <Header>
+    <HeaderStart>
+      <AppIcon icon="calculator" size="sm" color="bg-violet-500" />
+      <HeaderTitle>{pageTitle}</HeaderTitle>
+    </HeaderStart>
+    <HeaderEnd>Fast, accurate pricing estimates</HeaderEnd>
+  </Header>
+  <main class="container max-w-7xl mx-auto px-6 py-8">
+    <PageHeadingGroup>
+      <PageHeadingTitle>Pricing</PageHeadingTitle>
+      <PageHeadingSubtitle>Select your options below</PageHeadingSubtitle>
+    </PageHeadingGroup>
+
+    <PricingForm client:load />
+
+  </main>
+</DefaultLayout>

@@ -1,0 +1,64 @@
+---
+import type { AppIcons } from '@/components/astro/appIcons'
+import AppIcon from '@/components/astro/AppIcon.astro'
+import AppNavCard from '@/components/astro/AppNavCard.astro'
+import Header from '@/components/astro/base/Header/Header.astro'
+import HeaderEnd from '@/components/astro/base/Header/HeaderEnd.astro'
+import HeaderStart from '@/components/astro/base/Header/HeaderStart.astro'
+import HeaderTitle from '@/components/astro/base/Header/HeaderTitle.astro'
+import PageHeadingGroup from '@/components/astro/base/PageHeading/PageHeadingGroup.astro'
+import PageHeadingSubtitle from '@/components/astro/base/PageHeading/PageHeadingSubtitle.astro'
+import PageHeadingTitle from '@/components/astro/base/PageHeading/PageHeadingTitle.astro'
+import DefaultLayout from '@/layouts/DefaultLayout.astro'
+
+const pageTitle = 'App Launcher'
+
+const apps: {
+  title: string
+  icon: AppIcons
+  color: `bg-${string}-500`
+  path: `/${string}`
+}[] = [
+  {
+    title: 'Pricing Model',
+    icon: 'calculator',
+    color: 'bg-violet-500',
+    path: '/pricing',
+  },
+  {
+    title: 'MCAT AI',
+    icon: 'book-open-text',
+    color: 'bg-orange-500',
+    path: '/mcat-ai',
+  },
+
+]
+---
+<DefaultLayout
+  metaTitle={pageTitle}
+  metaDescription="Select an app to get started"
+  className="bg-linear-to-b from-neutral-50 to-cyan-50/70"
+>
+  <Header>
+    <HeaderStart>
+      <AppIcon icon="pyramid" size="sm" color="bg-cyan-500" />
+      <HeaderTitle>{pageTitle}</HeaderTitle>
+    </HeaderStart>
+    <HeaderEnd>What will you do today?</HeaderEnd>
+  </Header>
+  <main class="container mx-auto px-6 py-8">
+    <PageHeadingGroup>
+      <PageHeadingTitle>Home</PageHeadingTitle>
+      <PageHeadingSubtitle>Select an application to get started</PageHeadingSubtitle>
+    </PageHeadingGroup>
+
+    <article class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      {apps.map(x => (
+        <a href={x.path}>
+          <AppNavCard title={x.title} icon={x.icon} color={x.color} />
+        </a>
+      ),
+      )}
+    </article>
+  </main>
+</DefaultLayout>

@@ -1,0 +1,54 @@
+---
+import type { AppIcons } from '@/components/astro/appIcons'
+import AppWindow from 'lucide-astro/AppWindow'
+import BookOpenText from 'lucide-astro/BookOpenText'
+import Calculator from 'lucide-astro/Calculator'
+import Loader from 'lucide-astro/Loader'
+import Pyramid from 'lucide-astro/Pyramid'
+
+import Table from 'lucide-astro/Table'
+
+export interface Props {
+  icon: AppIcons
+  size: 'sm' | 'md'
+  color: string
+}
+
+const { color, size, icon } = Astro.props
+
+let LucideIcon = Loader
+
+switch (icon) {
+  case 'pyramid':
+    LucideIcon = Pyramid
+    break
+  case 'calculator':
+    LucideIcon = Calculator
+    break
+  case 'book-open-text':
+    LucideIcon = BookOpenText
+    break
+  case 'table':
+    LucideIcon = Table
+    break
+  case 'app-window':
+    LucideIcon = AppWindow
+    break
+}
+---
+
+<span
+  class:list={[
+    {
+      'p-2': size === 'sm',
+      'p-3': size === 'md',
+    },
+    'rounded-xl',
+    color,
+  ]}
+>
+  <LucideIcon
+    size={(size === 'sm' && 24) || (size === 'md' && 32)}
+    class="text-white"
+  />
+</span>

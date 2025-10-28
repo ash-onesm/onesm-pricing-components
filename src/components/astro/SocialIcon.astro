@@ -1,0 +1,20 @@
+---
+import Github from 'lucide-astro/Github'
+import Twitter from 'lucide-astro/Twitter'
+import Youtube from 'lucide-astro/Youtube'
+
+export interface Props {
+  platform: string
+  usernameSlug: string
+  className?: string
+}
+const { platform, usernameSlug, className } = Astro.props
+---
+<a href={`https://www.${platform}.com/${usernameSlug}`} class:list={className}>
+  {platform === 'twitter'
+    && <Twitter />}
+  {platform === 'github'
+    && <Github />}
+  {platform === 'youtube'
+    && <Youtube />}
+</a>

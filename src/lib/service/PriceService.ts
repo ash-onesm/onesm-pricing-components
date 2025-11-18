@@ -73,32 +73,18 @@ class PriceService {
     return lowerPricePoint.hourlyRate - (rateDifference * (hoursAboveLower / hourRange))
   }
 
-  doesCourseProvide15PercentDiscount(courseType: CourseType): boolean {
-    return courseType === 'bootcamp'
-  }
-
-  doesCourseProvideComboDiscount(courseType: CourseType): boolean {
-    return courseType === 'comprehensive-course'
+  doesCourseProvide20PercentDiscount(courseType: CourseType): boolean {
+    return courseType === 'bootcamp' || courseType === 'comprehensive-course'
   }
 
   calculateDiscountedTutoringPrice(tutoringHourPrices: PriceData['tutoringHourPrices'], tutoringHours: number, courseType: CourseType): number {
     const hourlyRate = this.calculateHourlyRate(tutoringHourPrices, tutoringHours)
     let tutoringPrice = tutoringHours * hourlyRate
 
-    if (this.doesCourseProvide15PercentDiscount(courseType)) {
-      tutoringPrice = tutoringPrice * 0.85 // 15% discount
+    if (this.doesCourseProvide20PercentDiscount(courseType)) {
+      tutoringPrice = tutoringPrice * 0.80 // 20% discount
     }
-    else if (this.doesCourseProvideComboDiscount(courseType)) {
-      if (tutoringHours <= 20) {
-        tutoringPrice = tutoringPrice -= 700
-      }
-      else if (tutoringHours < 30) {
-        tutoringPrice = tutoringPrice -= 600
-      }
-      else if (tutoringHours >= 30) {
-        tutoringPrice = tutoringPrice -= 500
-      }
-    }
+
     return tutoringPrice
   }
 

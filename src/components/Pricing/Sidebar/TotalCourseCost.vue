@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type PricingConfiguration from '@/lib/model/PricingConfiguration.ts'
-import { CircleCheck, DollarSign, Percent } from 'lucide-vue-next'
+import { CircleCheck } from 'lucide-vue-next'
 import { computed, ref } from 'vue'
 import BNPLPaymentList from '@/components/Pricing/Sidebar/BNPLPaymentList.vue'
 import DiscountBadge from '@/components/Pricing/TutoringHours/DiscountBadge.vue'
@@ -66,6 +66,10 @@ const summary = computed(() => {
     list.push('Extracurricular & Interview support')
   }
 
+  if (props.pricingConfiguration.weeklyCheckIn) {
+    list.push('Weekly Check-Ins')
+  }
+
   if (props.pricingConfiguration.tutoringHours > 0 && props.pricingConfiguration.courseType !== 'admissions') {
     list.push(`${props.pricingConfiguration.tutoringHours} Tutoring Hours`)
   }
@@ -124,9 +128,23 @@ async function checkout() {
 
     <template v-if="props.pricingConfiguration.courseType !== 'admissions'">
       <ul class="space-y-2">
-        <li v-if="props.pricingConfiguration.courseType !== 'plain-hours'" class="flex justify-between">
+        <li v-if="props.pricingConfiguration.courseType === 'bootcamp'" class="flex justify-between">
+          <span>{{ courseName }}</span>
+          <span>
+            <span class="line-through">
+              $3750
+            </span>
+            ${{ coursePrice }}
+          </span>
+        </li>
+        <li v-else-if="props.pricingConfiguration.courseType !== 'plain-hours'" class="flex justify-between">
           <span>{{ courseName }}</span>
           <span>${{ coursePrice }}</span>
+        </li>
+
+        <li v-if="pricingConfiguration.weeklyCheckIn" class="flex justify-between">
+          <span>Weekly Check-Ins</span>
+          <span>${{ priceMocks.addonPrices.weeklyCheckInPrice }}</span>
         </li>
 
         <template v-if="props.pricingConfiguration.tutoringHours > 0">
@@ -183,7 +201,6 @@ async function checkout() {
           <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
         </svg>
         <span class="shrink-0">
-
           Proceed to Checkout
         </span>
       </button>

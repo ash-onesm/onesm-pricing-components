@@ -46,8 +46,10 @@ const model = defineModel<boolean>('weeklyCheckIn')
           <Gift class="h-4 w-4" />
           <span class="mx-1">Early Bird Special</span>
         </div>
-        <p class="px-2 py-1 text-stone-800">
-          Free for the first 10 sign-ups
+        <p class="px-2 py-1 text-stone-800" @click.stop>
+          Free for the first 10 sign-ups with code
+          <span class="px-2 py-1 rounded-md bg-stone-300 font-mono font-bold">WINTERBREAK</span>
+          on next page
         </p>
       </CardFooter>
     </HoverableCard>

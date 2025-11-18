@@ -23,7 +23,7 @@ const weeklyCheckIn = ref(true)
   >
     <section class="md:col-span-4 lg:col-span-2 space-y-8">
       <DiscountedCourseFieldset
-        :original-price="3780"
+        :original-price="3750"
         :discounted-price="priceMocks.coursePrices.bootcampPrice"
       >
         Winter Break MCAT Bootcamp

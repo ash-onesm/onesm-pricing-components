@@ -2,16 +2,17 @@
 import type { CourseType } from '@/lib/model/CourseType.ts'
 import { ref } from 'vue'
 import AddOnFieldset from '@/components/Pricing/AddOn/AddOnFieldset.vue'
-import FixedCourseFieldset from '@/components/Pricing/CourseSelect/FixedCourseFieldset.vue'
+import WeeklyCheckInCard from '@/components/Pricing/AddOn/WeeklyCheckInCard.vue'
+import DiscountedCourseFieldset from '@/components/Pricing/CourseSelect/DiscountedCourseFieldset.vue'
 import TotalCourseCost from '@/components/Pricing/Sidebar/TotalCourseCost.vue'
-import TutoringHoursSlider from '@/components/Pricing/TutoringHours/TutoringHoursSlider.vue'
 import priceMocks from '@/lib/prices.mock.ts'
 
 const courseType = ref<CourseType>('bootcamp')
-const tutoringEnabled = ref(true)
+const tutoringEnabled = ref(false)
 const tutoringHours = ref(10)
 const aamcContent = ref(false)
 const uworldContent = ref(false)
+const weeklyCheckIn = ref(true)
 </script>
 
 <template>
@@ -21,16 +22,17 @@ const uworldContent = ref(false)
     @submit.prevent
   >
     <section class="md:col-span-4 lg:col-span-2 space-y-8">
-      <FixedCourseFieldset :price="priceMocks.coursePrices.bootcampPrice">
+      <DiscountedCourseFieldset
+        :original-price="3780"
+        :discounted-price="priceMocks.coursePrices.bootcampPrice"
+      >
         Winter Break MCAT Bootcamp
-      </FixedCourseFieldset>
-      <TutoringHoursSlider
-        v-model:hours="tutoringHours"
-        v-model:checked="tutoringEnabled"
-        :min-hours="5"
-        :tutoring-hour-prices="priceMocks.tutoringHourPrices"
-        :course-type="courseType"
+      </DiscountedCourseFieldset>
+
+      <WeeklyCheckInCard
+        v-model:weekly-check-in="weeklyCheckIn"
       />
+
       <AddOnFieldset
         v-model:aamc-content="aamcContent"
         v-model:uworld-content="uworldContent"
@@ -47,6 +49,7 @@ const uworldContent = ref(false)
         tutoringHours: tutoringEnabled ? tutoringHours : 0,
         aamcContent,
         uworldContent,
+        weeklyCheckIn,
       }"
     />
   </form>

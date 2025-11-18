@@ -44,11 +44,8 @@ const discountedTutoringHourPrice = computed(() => round(PriceService.calculateD
   props.pricingConfiguration.courseType,
 ), 0))
 
-const isComboDiscount = computed(
-  () => PriceService.doesCourseProvideComboDiscount(props.pricingConfiguration.courseType),
-)
-const is15PercentDiscount = computed(
-  () => PriceService.doesCourseProvide15PercentDiscount(props.pricingConfiguration.courseType),
+const is20PercentDiscount = computed(
+  () => PriceService.doesCourseProvide20PercentDiscount(props.pricingConfiguration.courseType),
 )
 const discountValue = computed(() => round(tutoringHourPrice.value - discountedTutoringHourPrice.value, 0))
 
@@ -135,7 +132,7 @@ async function checkout() {
         <template v-if="props.pricingConfiguration.tutoringHours > 0">
           <li class="flex justify-between">
             <span>Tutoring Hours</span>
-            <div v-if="is15PercentDiscount || isComboDiscount">
+            <div v-if="is20PercentDiscount">
               <span class="line-through decoration-2">
                 ${{ tutoringHourPrice }}
               </span>
@@ -144,15 +141,10 @@ async function checkout() {
             <span v-else>${{ tutoringHourPrice }}</span>
           </li>
 
-          <li v-if="is15PercentDiscount || isComboDiscount" class="flex justify-between">
+          <li v-if="is20PercentDiscount" class="flex justify-between">
             <div>
-              <DiscountBadge v-if="is15PercentDiscount">
-                <Percent class="h-4 w-4" />
-                15% discount applied
-              </DiscountBadge>
-              <DiscountBadge v-if="isComboDiscount">
-                <DollarSign class="h-4 w-4" />
-                Combo discount applied
+              <DiscountBadge v-if="is20PercentDiscount">
+                20% tutoring discount
               </DiscountBadge>
             </div>
             -${{ discountValue }}

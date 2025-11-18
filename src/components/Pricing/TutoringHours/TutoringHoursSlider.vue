@@ -30,11 +30,9 @@ watch(() => props.courseType, (courseType) => {
 })
 
 const hours = defineModel<number>('hours')
-const isComboDiscount = computed(
-  () => PriceService.doesCourseProvideComboDiscount(props.courseType),
-)
-const is15PercentDiscount = computed(
-  () => PriceService.doesCourseProvide15PercentDiscount(props.courseType),
+
+const is20PercentDiscount = computed(
+  () => PriceService.doesCourseProvide20PercentDiscount(props.courseType),
 )
 
 const pricePerHour = computed(() => PriceService.calculateHourlyRate(
@@ -86,14 +84,10 @@ const totalCost = computed(() => round(PriceService.calculateHourlyRate(
         :total-cost="totalCost"
         :disabled="!checked"
       />
-      <DiscountBadge v-if="checked && is15PercentDiscount">
-        <Percent class="h-4 w-4" />
-        15% discount applied
+      <DiscountBadge v-if="checked && is20PercentDiscount">
+        20% tutoring discount
       </DiscountBadge>
-      <DiscountBadge v-if="checked && isComboDiscount">
-        <DollarSign class="h-4 w-4" />
-        Combo discount applied
-      </DiscountBadge>
+
     </section>
     <div class="flex justify-center">
       <section
